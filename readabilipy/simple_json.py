@@ -14,17 +14,20 @@ from .utils import chdir
 
 
 def have_node():
+    """Check that we can run node and have a new enough version """
     try:
-        cp = subprocess.run(['node', '-v'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+        cp = subprocess.run(['node', '-v'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False)
         returncode = cp.returncode
     except FileNotFoundError:
-        returncode = 1
-    return returncode == 0
+        return False
+
+    major = int(cp.stdout.split(b'.')[0].lstrip(b'v'))
+    return returncode == 0 and major >= 10
 
 
 def simple_json_from_html_string(html, content_digests=False, node_indexes=False, use_readability=False):
     if use_readability and not have_node():
-        print("Warning: node executable not found, reverting to pure-Python mode. Install node.js to use Readability.js.", file=sys.stderr)
+        print("Warning: node executable not found, reverting to pure-Python mode. Install Node.js v10 or newer to use Readability.js.", file=sys.stderr)
         use_readability = False
 
     if use_readability:
