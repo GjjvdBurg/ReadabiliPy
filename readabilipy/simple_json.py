@@ -15,8 +15,7 @@ from .utils import chdir
 
 def have_node():
     try:
-        cp = subprocess.run(['node', '-v'], stdout=subprocess.DEVNULL, 
-                stderr=subprocess.DEVNULL)
+        cp = subprocess.run(['node', '-v'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
         returncode = cp.returncode
     except FileNotFoundError:
         returncode = 1
@@ -25,9 +24,7 @@ def have_node():
 
 def simple_json_from_html_string(html, content_digests=False, node_indexes=False, use_readability=False):
     if use_readability and not have_node():
-        print("Warning: node executable not found, reverting to pure-Python "
-                "mode. Install node.js to use Readability.js.", 
-                file=sys.stderr)
+        print("Warning: node executable not found, reverting to pure-Python mode. Install node.js to use Readability.js.", file=sys.stderr)
         use_readability = False
 
     if use_readability:
