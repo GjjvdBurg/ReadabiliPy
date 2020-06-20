@@ -21,6 +21,11 @@ install:
   - npm config ls -l
   # Check nvm remotes
   - nvm ls-remote
+  # Let's see if we can use nvm to update node
+  - nvm use v12.18.1
+  - node -v
+  - npm version
+  - npm config ls -l
   # Install package, while updating dependencies
   - pip install --upgrade --upgrade-strategy eager .[dev]
   # Debugging
