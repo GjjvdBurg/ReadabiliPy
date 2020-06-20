@@ -9,7 +9,7 @@ before_install:
   # Install node.js following instructions from
   #   https://nodejs.org/en/download/package-manager/
   - sudo apt install curl
-  - curl -sL https://deb.nodesource.com/setup_11.x | sudo bash -
+  - curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
   - sudo apt install nodejs
 
 install:
