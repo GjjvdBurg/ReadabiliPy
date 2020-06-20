@@ -92,6 +92,7 @@ class CustomInstall(install):
 
         # Run NPM installation
         if not self.have_npm():
+            os.system("echo 'Warning: NPM is needed to use Readability.js'")
             print(
                 "Warning: NPM is needed to use Readability.js.",
                 file=sys.stderr,
@@ -101,6 +102,9 @@ class CustomInstall(install):
         jsdir = os.path.join(self.install_lib, NAME, "javascript")
         pkgjson = os.path.join(jsdir, "package.json")
         if not os.path.exists(pkgjson):
+            os.system(
+                "echo 'Error: Couldn't find package.json. This is unexpected.'"
+            )
             print(
                 "Error: Couldn't find package.json. This is unexpected.",
                 file=sys.stderr,
@@ -115,6 +119,7 @@ class CustomInstall(install):
                 returncode = 1
 
         if not returncode == 0:
+            os.system('echo "Error: Failed to install dependencies with npm."')
             print(
                 "Error: Failed to install dependencies with npm.",
                 file=sys.stderr,

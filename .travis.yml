@@ -13,6 +13,8 @@ before_install:
   - sudo apt install nodejs
 
 install:
+  # Check npm
+  - npm version
   # Install package, while updating dependencies
   - pip install --upgrade --upgrade-strategy eager .[dev]
 
