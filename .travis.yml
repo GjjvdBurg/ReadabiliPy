@@ -17,6 +17,8 @@ install:
   - npm version
   # check node version
   - node -v
+  # Let's see the npm config
+  - npm config ls -l
   # Install package, while updating dependencies
   - pip install --upgrade --upgrade-strategy eager .[dev]
   # Debugging
