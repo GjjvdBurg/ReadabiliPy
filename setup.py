@@ -113,7 +113,14 @@ class CustomInstall(install):
 
         with chdir(jsdir):
             try:
-                cp = subprocess.run(["npm", "install"])
+                cp = subprocess.run(["npm", "install"], capture_output=True)
+
+                with open('/tmp/travis_debug_stdout.txt', 'wb') as fp:
+                    fp.write(cp.stdout)
+
+                with open('/tmp/travis_debug_stderr.txt', 'wb') as fp:
+                    fp.write(cp.stderr)
+
                 returncode = cp.returncode
             except FileNotFoundError:
                 returncode = 1

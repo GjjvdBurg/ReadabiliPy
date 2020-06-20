@@ -17,6 +17,9 @@ install:
   - npm version
   # Install package, while updating dependencies
   - pip install --upgrade --upgrade-strategy eager .[dev]
+  # Debugging
+  - cat /tmp/travis_debug_stdout.txt
+  - cat /tmp/travis_debug_stderr.txt
 
 script:
   # Run all pytest unit tests
