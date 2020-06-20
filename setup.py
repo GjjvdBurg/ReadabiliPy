@@ -92,7 +92,6 @@ class CustomInstall(install):
 
         # Run NPM installation
         if not self.have_npm():
-            os.system("echo 'Warning: NPM is needed to use Readability.js'")
             print(
                 "Warning: NPM is needed to use Readability.js.",
                 file=sys.stderr,
@@ -102,9 +101,6 @@ class CustomInstall(install):
         jsdir = os.path.join(self.install_lib, NAME, "javascript")
         pkgjson = os.path.join(jsdir, "package.json")
         if not os.path.exists(pkgjson):
-            os.system(
-                "echo 'Error: Couldn't find package.json. This is unexpected.'"
-            )
             print(
                 "Error: Couldn't find package.json. This is unexpected.",
                 file=sys.stderr,
@@ -113,20 +109,12 @@ class CustomInstall(install):
 
         with chdir(jsdir):
             try:
-                cp = subprocess.run(["npm", "install"], capture_output=True)
-
-                with open('/tmp/travis_debug_stdout.txt', 'wb') as fp:
-                    fp.write(cp.stdout)
-
-                with open('/tmp/travis_debug_stderr.txt', 'wb') as fp:
-                    fp.write(cp.stderr)
-
+                cp = subprocess.run(["npm", "install"])
                 returncode = cp.returncode
             except FileNotFoundError:
                 returncode = 1
 
         if not returncode == 0:
-            os.system('echo "Error: Failed to install dependencies with npm."')
             print(
                 "Error: Failed to install dependencies with npm.",
                 file=sys.stderr,
