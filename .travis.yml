@@ -8,9 +8,10 @@ python:
 before_install:
   # Install node.js following instructions from
   #   https://nodejs.org/en/download/package-manager/
+  - sudo apt-get remove npm nodejs
   - sudo apt install curl
   - curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
-  - sudo apt install -y nodejs npm
+  - sudo apt install -y nodejs
 
 install:
   # Check npm
