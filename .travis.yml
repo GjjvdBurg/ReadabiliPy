@@ -19,6 +19,8 @@ install:
   - node -v
   # Let's see the npm config
   - npm config ls -l
+  # Check nvm remotes
+  - nvm ls-remote
   # Install package, while updating dependencies
   - pip install --upgrade --upgrade-strategy eager .[dev]
   # Debugging
