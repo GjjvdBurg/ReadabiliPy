@@ -22,6 +22,7 @@ install:
   # Check nvm remotes
   - nvm ls-remote
   # Let's see if we can use nvm to update node
+  - nvm install v12.18.1
   - nvm use v12.18.1
   - node -v
   - npm version
