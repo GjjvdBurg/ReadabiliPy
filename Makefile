@@ -58,8 +58,7 @@ test: venv ## Run unit tests
 	source $(VENV_DIR)/bin/activate && pyflakes *.py readabilipy tests
 	source $(VENV_DIR)/bin/activate && pycodestyle --statistics \
 		--ignore=E501 --count *.py readabilipy tests
-	source $(VENV_DIR)/bin/activate && \
-		pylint --ignore=F0001 readabilipy tests
+	source $(VENV_DIR)/bin/activate && pylint readabilipy
 
 #################
 # Documentation #
